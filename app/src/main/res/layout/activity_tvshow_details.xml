@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="isLoading"
+            type="Boolean" />
+        
+        <variable
+            name="tvShowImageURL"
+            type="String" />
+
+        <variable
+            name="tvShowName"
+            type="String" />
+
+        <variable
+            name="networkCountry"
+            type="String" />
+
+        <variable
+            name="startDate"
+            type="String" />
+
+        <variable
+            name="status"
+            type="String" />
+        
+        <variable
+            name="description"
+            type="String" />
+        
+        <variable
+            name="rating"
+            type="String" />
+
+        <variable
+            name="genres"
+            type="String" />
+
+        <variable
+            name="runtime"
+            type="String" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        tools:context=".activities.TVShowDetailsActivity">
+        
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/sliderViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <View
+                    android:id="@+id/viewFadingEdge"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/background_fading_edage"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/sliderViewPager" />
+
+                <LinearLayout
+                    android:id="@+id/layoutSliderIndicator"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end|center_vertical"
+                    android:padding="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/viewFadingEdge"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageTvShow"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/imageBack"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/background_back_button"
+                    android:padding="3dp"
+                    android:src="@drawable/ic_back"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/colorTextIcons"
+                    android:contentDescription="@string/app_name" />
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/imageTvShow"
+                    android:layout_width="130dp"
+                    android:layout_height="190dp"
+                    android:imageURL="@{tvShowImageURL}"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    app:riv_corner_radius="10dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/sliderViewPager"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sliderViewPager" />
+
+                <TextView
+                    android:id="@+id/textName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:text="@{tvShowName,default=Unknown}"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:fontFamily="@font/ubuntu_bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorTextIcons"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@+id/imageTvShow"
+                    app:layout_constraintTop_toBottomOf="@+id/sliderViewPager"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/textNetworkCountry"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:text="@{networkCountry,default=Unknown}"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:fontFamily="@font/ubuntu_medium"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorTextOther"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@+id/textName"
+                    app:layout_constraintTop_toBottomOf="@+id/textName"
+                    app:layout_constraintEnd_toEndOf="@+id/textName"/>
+
+                <TextView
+                    android:id="@+id/textStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:text="@{status,default=Unknown}"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@+id/textName"
+                    app:layout_constraintTop_toBottomOf="@+id/textNetworkCountry"
+                    app:layout_constraintEnd_toEndOf="@+id/textName"/>
+
+                <TextView
+                    android:id="@+id/textStarted"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:text='@{"Started on : " + startDate,default=Unknown}'
+                    android:includeFontPadding="false"
+                    android:maxLines="2"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorTextSecondary"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@+id/textName"
+                    app:layout_constraintTop_toBottomOf="@+id/textStatus"
+                    app:layout_constraintEnd_toEndOf="@+id/textName"/>
+
+                <TextView
+                    android:id="@+id/textDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:text="@{description,default=Unknown}"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="2dp"
+                    android:maxLines="4"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorTextIcons"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/imageTvShow"
+                    />
+
+                <TextView
+                    android:id="@+id/textReadMore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:text="@string/read_more"
+                    android:fontFamily="@font/ubuntu_medium"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorAccent"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@+id/textDescription"
+                    app:layout_constraintTop_toBottomOf="@+id/textDescription"/>
+
+                <View
+                    android:id="@+id/viewDivider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@color/colorTextSecondary"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/textReadMore"
+                    />
+                
+                <LinearLayout
+                    android:id="@+id/layoutMisc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="gone"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    app:layout_constraintTop_toBottomOf="@+id/viewDivider1">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_star"
+                        app:tint="@color/colorTextOther"
+                        android:contentDescription="@string/app_name" />
+
+                    <TextView
+                        android:id="@+id/textRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:ellipsize="end"
+                        android:includeFontPadding="false"
+                        android:text="@{rating,default=Unknown}"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorTextIcons"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:includeFontPadding="false"
+                        android:text="@string/u2022"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorAccent"
+                        />
+
+                    <TextView
+                        android:id="@+id/textGenres"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:ellipsize="end"
+                        android:includeFontPadding="false"
+                        android:text="@{genres,default=Unknown}"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorTextIcons"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:includeFontPadding="false"
+                        android:text="@string/u2022"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorAccent"
+                        />
+
+                    <TextView
+                        android:id="@+id/textRunTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:ellipsize="end"
+                        android:includeFontPadding="false"
+                        android:text="@{runtime,default=Unknown}"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorTextIcons"
+                        />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/viewDivider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@color/colorTextSecondary"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutMisc"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonWebsite"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:fontFamily="@font/ubuntu_medium"
+                    android:includeFontPadding="false"
+                    android:text="@string/website"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    android:backgroundTint="@color/colorAccent"
+                    app:cornerRadius="6dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonEpisodes"
+                    app:layout_constraintTop_toBottomOf="@id/viewDivider2"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonEpisodes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/ubuntu_medium"
+                    android:includeFontPadding="false"
+                    android:text="@string/episodes"
+                    android:textSize="14sp"
+                    android:textColor="#212121"
+                    android:visibility="gone"
+                    android:backgroundTint="@color/colorTextOther"
+                    app:cornerRadius="6dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/buttonWebsite"
+                    app:layout_constraintTop_toBottomOf="@id/viewDivider2"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="16dp"
+            android:visibility="@{isLoading ? View.VISIBLE : View.GONE ,default=gone}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageWatchlist"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/background_fab"
+            android:contentDescription="@string/app_name"
+            android:padding="8dp"
+            android:src="@drawable/ic_watchlist"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/colorTextIcons"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

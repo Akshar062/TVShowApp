@@ -1,0 +1,79 @@
+plugins {
+    alias(libs.plugins.androidApplication)
+}
+
+android {
+    namespace 'com.akshar.tvshowapp'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.akshar.tvshowapp"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.activity
+    implementation libs.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+
+    // Retrofit
+    implementation libs.retrofit
+    implementation libs.retrofitGson
+
+    // room
+    implementation libs.room
+    annotationProcessor libs.roomCompiler
+    implementation libs.roomRxJava
+
+    // RxJava
+    implementation libs.rxJava
+    implementation libs.rxAndroid
+
+    // picasso
+    implementation libs.picasso
+
+    // lifecycle
+    implementation libs.lifecycle
+
+    // scalable size unit
+//    implementation libs.scalableSizeUnit
+//    implementation libs.scalableSizeUnitAdapter
+
+    // rounded image view
+    implementation libs.roundedImageView
+
+
+
+
+
+}
