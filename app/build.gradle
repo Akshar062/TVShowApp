@@ -45,30 +45,20 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
-
     // Retrofit
     implementation libs.retrofit
     implementation libs.retrofitGson
-
     // room
     implementation libs.room
     annotationProcessor libs.roomCompiler
     implementation libs.roomRxJava
-
     // RxJava
     implementation libs.rxJava
     implementation libs.rxAndroid
-
     // picasso
     implementation libs.picasso
-
     // lifecycle
     implementation libs.lifecycle
-
-    // scalable size unit
-//    implementation libs.scalableSizeUnit
-//    implementation libs.scalableSizeUnitAdapter
-
     // rounded image view
     implementation libs.roundedImageView
 

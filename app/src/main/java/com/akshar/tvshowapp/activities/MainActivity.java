@@ -1,5 +1,6 @@
 package com.akshar.tvshowapp.activities;
 
+// Importing necessary libraries and classes
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -23,16 +24,24 @@ import com.akshar.tvshowapp.viewmodels.MostPopularTVShowViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * MainActivity class that extends AppCompatActivity and implements TVShowsListeners.
+ * This class is responsible for displaying the main activity of the application.
+ */
 public class MainActivity extends AppCompatActivity implements TVShowsListeners {
 
+    // Declaring necessary variables and objects
     private MostPopularTVShowViewModel viewModel;
-
     private ActivityMainBinding activityMainBinding;
     private List<TVShow> tvShows = new ArrayList<>();
     private TVShowAdapter tvShowAdapter;
     private int currentPage = 1;
     private int totalAvailablePages = 1;
 
+    /**
+     * This method is called when the activity is starting.
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +55,9 @@ public class MainActivity extends AppCompatActivity implements TVShowsListeners 
         doInitialization();
     }
 
+    /**
+     * This method is responsible for initializing necessary variables and objects.
+     */
     private void doInitialization() {
         activityMainBinding.tvShowRecyclerView.setHasFixedSize(true);
         viewModel = new ViewModelProvider(this).get(MostPopularTVShowViewModel.class);
@@ -66,6 +78,9 @@ public class MainActivity extends AppCompatActivity implements TVShowsListeners 
         getMostPopularTVShows();
     }
 
+    /**
+     * This method is responsible for getting the most popular TV shows.
+     */
     private void getMostPopularTVShows() {
         toggleLoading();
         viewModel.getMostPopularTVShows(currentPage).observe(this, tvShowResponse -> {
@@ -81,6 +96,9 @@ public class MainActivity extends AppCompatActivity implements TVShowsListeners 
         });
     }
 
+    /**
+     * This method is responsible for toggling the loading state.
+     */
     private void toggleLoading() {
         if (currentPage == 1) {
             activityMainBinding.setIsLoading(activityMainBinding.getIsLoading() == null || !activityMainBinding.getIsLoading());
@@ -89,11 +107,14 @@ public class MainActivity extends AppCompatActivity implements TVShowsListeners 
         }
     }
 
+    /**
+     * This method is called when a TV show is clicked.
+     * @param tvShow The TV show that was clicked.
+     */
     @Override
     public void onTVShowClicked(TVShow tvShow) {
         Intent intent = new Intent(getApplicationContext(), TVShowDetailsActivity.class);
         intent.putExtra("tvShow", tvShow);
         startActivity(intent);
-
     }
 }
