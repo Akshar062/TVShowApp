@@ -25,7 +25,7 @@ public class TVShow implements Serializable {
     private String startDate;
 
     @SerializedName("end_date")
-    private Date endDate;
+    private String endDate;
 
     @SerializedName("country")
     private String country;
@@ -52,12 +52,12 @@ public class TVShow implements Serializable {
         return permalink;
     }
 
-    public String  getStartDate() {
-        return startDate;
+    public String getStartDate() {
+        return String.valueOf(startDate);
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public String getEndDate() {
+        return String.valueOf(endDate);
     }
 
     public String getCountry() {
@@ -88,14 +88,6 @@ public class TVShow implements Serializable {
         this.permalink = permalink;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
     public void setCountry(String country) {
         this.country = country;
     }
@@ -110,5 +102,13 @@ public class TVShow implements Serializable {
 
     public void setImageThumbnailPath(String imageThumbnailPath) {
         this.imageThumbnailPath = imageThumbnailPath;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }
