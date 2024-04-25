@@ -1,7 +1,5 @@
 # TVShow App
 
-![App Logo](link_to_your_logo.png)
-
 ## Overview
 
 This Android app allows users to browse a list of available TV shows, view show details, explore episodes, and add shows to their wishlist using the MVVM architecture. The app also utilizes Room Database for wishlist management.
@@ -13,11 +11,6 @@ This Android app allows users to browse a list of available TV shows, view show 
 - **Visit Website**: Navigate to the official website of the TV show for more information.
 - **Episode List**: Access a bottom dialog listing all available episodes for a specific show.
 - **Wishlist Management**: Add TV shows to your wishlist using Room Database.
-
-## Screenshots
-
-![Screenshot 1](link_to_screenshot_1.png)
-![Screenshot 2](link_to_screenshot_2.png)
 
 ## Getting Started
 
